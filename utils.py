@@ -10,6 +10,7 @@ def get_json(source):
     with open(source, mode='r', encoding='utf-8') as file:
         return json.load(file)
 
+# print(get_json('data/posts.json'))
 
 def get_posts_all():
     """
@@ -18,6 +19,8 @@ def get_posts_all():
     """
     return get_json('data/posts.json')
 
+
+# print(get_posts_all())
 
 def get_comments_all():
     """
@@ -68,8 +71,11 @@ def search_for_posts(query):
 
 def get_post_by_pk(pk):
     all_posts = get_posts_all()
-    posts = [post for post in all_posts if pk == post['pk']]
-    return posts[0]
+    for post in all_posts:
+        if pk == post['pk']:
+            return post
+    # posts = [post for post in all_posts if pk == post['pk']]
+    # return posts[0]
 
-# print(get_post_by_pk(5))
+print(get_post_by_pk(8))
 # print([post for post in get_posts_all() if 5== post['pk']][0])

@@ -13,6 +13,7 @@ post_search_blueprint = Blueprint('post_search_blueprint', __name__, template_fo
 # creating blueprint for post view, setting template folder
 user_search_blueprint = Blueprint('user_search_blueprint', __name__, template_folder='templates')
 
+
 # calling blueprint for main page in required template
 @main_blueprint.route('/')
 def main_page():
@@ -36,7 +37,8 @@ def search_post_by_content():
     posts_with_string = utils.search_for_posts(string)
     posts_with_string_to_show = posts_with_string[0:10]
     posts_quantity = len(posts_with_string)
-    return render_template('search.html', posts_quantity=posts_quantity, posts_with_string_to_show=posts_with_string_to_show)
+    return render_template('search.html', posts_quantity=posts_quantity,
+                           posts_with_string_to_show=posts_with_string_to_show)
 
 
 # calling blueprint for search by username results in required template
@@ -47,3 +49,6 @@ def search_user_posts_by_username(username):
     return render_template('user-feed.html', user_posts=user_posts, posts_quantity=posts_quantity)
 
 
+@main_blueprint.errorhandler(404)
+def page_not_found():
+    return 'page not fouuund', 404
