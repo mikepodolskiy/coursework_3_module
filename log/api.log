@@ -1,0 +1,6 @@
+2023-01-12 18:34:22,814 [INFO] Request "/api/posts/6"
+2023-01-12 18:34:25,806 [INFO] Request "/api/posts/"
+2023-01-12 18:34:51,854 [INFO] Request "/api/posts/"
+2023-01-12 18:34:57,089 [INFO] Request "/api/posts/77"
+2023-01-12 18:35:04,315 [INFO] Request "/api/posts/8"
+2023-01-12 18:35:08,291 [INFO] Request "/api/posts/"

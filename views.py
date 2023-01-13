@@ -46,9 +46,6 @@ def search_post_by_content():
 def search_user_posts_by_username(username):
     user_posts = utils.get_posts_by_user(username)
     posts_quantity = len(user_posts)
-    return render_template('user-feed.html', user_posts=user_posts, posts_quantity=posts_quantity)
+    return render_template('user-feed.html', user_posts=user_posts, posts_quantity=posts_quantity, username=username)
 
 
-@main_blueprint.errorhandler(404)
-def page_not_found():
-    return 'page not fouuund', 404
