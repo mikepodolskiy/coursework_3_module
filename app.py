@@ -33,12 +33,12 @@ app.register_blueprint(user_search_blueprint)
 # create errors generating
 @app.errorhandler(404)
 def page_not_found(error):
-    return "Page not found", 404
+    return "404 - Page not found", 404
 
 
 @app.errorhandler(500)
 def page_not_found(error):
-    return "Internal server error", 500
+    return "500 - Internal server error", 500
 
 
 # generating API endpoints
