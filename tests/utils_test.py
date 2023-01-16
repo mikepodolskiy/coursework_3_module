@@ -485,3 +485,5 @@ test_search_for_posts_data= [('тарелка', [{'poster_name': 'leo', 'poster_
 @pytest.mark.parametrize("query, expected", test_search_for_posts_data)
 def test_search_for_posts(query, expected):
     assert search_for_posts(query) == expected
+
+
