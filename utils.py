@@ -1,12 +1,12 @@
-# import libraries
+# import required libraries
 import json
-from json import JSONDecodeError
 
-import pytest
 
+# defining functions
 def get_json(source):
     """
     get data from json file
+    raise exception if file wasn't found
     :return: list of posts
     """
     try:
@@ -15,32 +15,31 @@ def get_json(source):
     except FileNotFoundError as exception:
         return f"{exception} Json file with data not found"
 
-# print(get_json('data/posts.json'))
 
 def get_posts_all():
     """
-    get posts from posts.json file
+    get posts from posts.json file using function get_json()
     :return: list of posts
     """
     return get_json('data/posts.json')
 
 
-# print(get_posts_all())
-
 def get_comments_all():
     """
-    get posts from posts.json file
+    get posts from posts.json file using function get_json()
     :return: list of posts
     """
     return get_json('data/comments.json')
 
+
 def get_posts_by_user(user_name):
     """
-
+    getting list of all posts, creating list of usernames from all posts,
+    checking username correctness, if its correct - creating list of his posts,
+    otherwise raise value error as wrong username was requested
     :param user_name:
-    :return:
+    :return: list of posts fo required user
     """
-
     all_posts = get_posts_all()
     valid_users = list(set([post['poster_name'] for post in all_posts]))
     if user_name in valid_users:
@@ -49,9 +48,14 @@ def get_posts_by_user(user_name):
     raise ValueError("User was not found")
 
 
-# print(get_posts_by_user('johnny'))
-
 def get_comments_by_post_id(post_id: int):
+    """
+    getting all comments, all posts,checking type of requested post id,
+    checking if post with requested id exists, raising errors for wrong type,
+    :param post_id: requested number of post
+    :return: list of comments for requested id
+    or value error if id out of range of existing ids
+    """
     all_comments = get_comments_all()
     all_posts = get_posts_all()
     valid_post_pk = [post["pk"] for post in all_posts]
@@ -65,20 +69,24 @@ def get_comments_by_post_id(post_id: int):
     raise ValueError("Post was not found")
 
 
-# print(get_comments_by_post_id(13))
-# print([post["post_id"] for post in get_comments_all()])
-# print(10 in [post["post_id"] for post in get_comments_all()])
-
 def search_for_posts(query):
+    """
+    getting all posts, checking if posts contains query, forming list of posts, which contains
+    :param query: content to search in posts
+    :return:list of posts, containing query
+    """
     all_posts = get_posts_all()
     return [post for post in all_posts if query.lower() in post['content'].lower()]
 
 
-# print(search_for_posts('mjcck.nvhcv'))
-# print(search_for_posts('как'))
-
-
 def get_post_by_pk(pk):
+    """
+    getting all posts, searching for post with requested pk
+    raising type error, if requested pk has wrong type, value errors for 0 and negative numbers,
+    and if requested pk out of range of existing pk
+    :param pk:
+    :return:
+    """
     all_posts = get_posts_all()
     if type(pk) != int:
         raise TypeError('Input data should be integer')
@@ -89,10 +97,3 @@ def get_post_by_pk(pk):
     for post in all_posts:
         if pk == post['pk']:
             return post
-    # posts = [post for post in all_posts if pk == post['pk']]
-    # return posts[0]
-
-# print(get_post_by_pk(-1))
-# print([post for post in get_posts_all() if 5== post['pk']][0])
-
-

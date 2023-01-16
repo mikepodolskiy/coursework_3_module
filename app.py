@@ -37,7 +37,7 @@ def page_not_found(error):
 
 
 @app.errorhandler(500)
-def page_not_found(error):
+def internal_server_error(error):
     return "500 - Internal server error", 500
 
 

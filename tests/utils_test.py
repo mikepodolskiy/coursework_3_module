@@ -1,10 +1,11 @@
+# import required libraries and modules
 import pytest
 
 from utils import get_json, get_posts_all, get_post_by_pk, \
     get_posts_by_user, get_comments_by_post_id, get_comments_all, search_for_posts
 
 
-#
+# tests for get_json
 def test_get_json_list():
     data = get_json('data/posts.json')
     assert type(data) == list, 'Received data type is not "list"'
@@ -15,7 +16,8 @@ def test_get_json_dict():
     assert type(data[0]) == dict, 'Received data type is not "dict"'
 
 
-#
+# tests for get_posts_all
+
 test_get_posts_all_data = [('', [
     {
         "poster_name": "leo",
@@ -179,7 +181,9 @@ def test_get_posts_all_list():
     assert type(data) == list, 'Received data type is not "list"'
 
 
-#
+# tests for post_by_pk
+
+# creating list of data from initial files to compare with
 test_post_by_pk_data = [(1, {
     "poster_name": "leo",
     "poster_avatar": "https://randus.org/avatars/w/c1819dbdffffff18.png",
@@ -245,7 +249,9 @@ def test_get_post_by_pk_type_error_list():
         get_post_by_pk([1, 2])
 
 
-#
+# tests for get_posts_by_user
+
+# creating list of data from initial files to compare with
 test_get_posts_by_user_data = [("leo", [
     {'poster_name': 'leo', 'poster_avatar': 'https://randus.org/avatars/w/c1819dbdffffff18.png',
      'pic': 'https://images.unsplash.com/photo-1525351326368-efbb5cb6814d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&q=80',
@@ -292,8 +298,9 @@ def test_get_posts_by_user_error():
         get_posts_by_user('len')
 
 
-# get_comments_all
+# tests for get_comments_all
 
+# creating list of data from initial files to compare with
 test_get_comments_all_data = [('', [
     {
         "post_id": 1,
@@ -441,6 +448,7 @@ def test_get_comments_all_list():
 
 # get_comments_by_post_id
 
+# creating list of data from initial files to compare with
 test_get_comments_by_post_id = [(1, [{'post_id': 1, 'commenter_name': 'hanna', 'comment': 'Очень здорово!', 'pk': 1}, {'post_id': 1, 'commenter_name': 'jlia', 'comment': ':)', 'pk': 2}, {'post_id': 1, 'commenter_name': 'ralf', 'comment': 'Класс!', 'pk': 3}, {'post_id': 1, 'commenter_name': 'leo', 'comment': 'Интересно. А где это?', 'pk': 4}]
 ), (4, [{'post_id': 4, 'commenter_name': 'johnny', 'comment': 'Ухты!', 'pk': 13}, {'post_id': 4, 'commenter_name': 'hank', 'comment': 'Норм )', 'pk': 14}, {'post_id': 4, 'commenter_name': 'larry', 'comment': 'Оу!', 'pk': 15}, {'post_id': 4, 'commenter_name': 'leo', 'comment': 'Интерсно...', 'pk': 16}]
 ), (7, [{'post_id': 7, 'commenter_name': 'hanna', 'comment': 'Очень необычная фоторафия! Где это?', 'pk': 20}]
@@ -477,13 +485,12 @@ def test_get_comments_by_post_id_error_list():
         get_comments_by_post_id([1, 2])
 
 
-# search_for_posts
+# tests for search_for_posts
 
+# creating list of data from initial files to compare with
 test_search_for_posts_data= [('тарелка', [{'poster_name': 'leo', 'poster_avatar': 'https://randus.org/avatars/w/c1819dbdffffff18.png', 'pic': 'https://images.unsplash.com/photo-1525351326368-efbb5cb6814d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&q=80', 'content': 'Ага, опять еда! Квадратная тарелка в квадратном кадре. А на тарелке, наверное, пирог! Мне было так жаль, что я не могу ее съесть. Я боялась, что они заметят, и если я не съем это, то, значит, они все подумают, что я плохая девочка... Но потом мне вспомнилось, как они на меня смотрели. Когда я была маленькой, на кухне всегда были родители, бабушка, дедушка, дядя Борис... Все вместе. И всегда одна я, потому что все остальные приходили туда лишь изредка. Мне казалось, если бы все ходили на работу, как и я, в этот свой офис, было бы совсем неинтересно.', 'views_count': 376, 'likes_count': 154, 'pk': 1}, {'poster_name': 'leo', 'poster_avatar': 'https://randus.org/avatars/w/c1819dbdffffff18.png', 'pic': 'https://images.unsplash.com/photo-1525351326368-efbb5cb6814d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&q=80', 'content': 'Ага, опять еда! Квадратная тарелка в квадратном кадре. А на тарелке, наверное, пирог! Мне было так жаль, что я не могу ее съесть. Я боялась, что они заметят, и если я не съем это, то, значит, они все подумают, что я плохая девочка... Но потом мне вспомнилось, как они на меня смотрели. Когда я была маленькой, на кухне всегда были родители, бабушка, дедушка, дядя Борис... Все вместе. И всегда одна я, потому что все остальные приходили туда лишь изредка. Мне казалось, если бы все ходили на работу, как и я, в этот свой офис, было бы совсем неинтересно.', 'views_count': 376, 'likes_count': 154, 'pk': 9}]), ('как', [{'poster_name': 'leo', 'poster_avatar': 'https://randus.org/avatars/w/c1819dbdffffff18.png', 'pic': 'https://images.unsplash.com/photo-1525351326368-efbb5cb6814d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&q=80', 'content': 'Ага, опять еда! Квадратная тарелка в квадратном кадре. А на тарелке, наверное, пирог! Мне было так жаль, что я не могу ее съесть. Я боялась, что они заметят, и если я не съем это, то, значит, они все подумают, что я плохая девочка... Но потом мне вспомнилось, как они на меня смотрели. Когда я была маленькой, на кухне всегда были родители, бабушка, дедушка, дядя Борис... Все вместе. И всегда одна я, потому что все остальные приходили туда лишь изредка. Мне казалось, если бы все ходили на работу, как и я, в этот свой офис, было бы совсем неинтересно.', 'views_count': 376, 'likes_count': 154, 'pk': 1}, {'poster_name': 'johnny', 'poster_avatar': 'https://randus.org/avatars/m/00183c7e3c382499.png', 'pic': 'https://images.unsplash.com/photo-1592660716763-09efba6db4e3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&q=80', 'content': 'Вышел погулять днем, пока все на работе. На улице странные штуки, похожие на колонны, которые кто-то сгрыз – незаметно и аккуратно, так, что даже мусора не осталось. И еще много странного: например, почему-то все птицы летают, как птицы, и, похоже, им это совершенно не мешает. Или вот еще: в траве – как будто следы от чьих-то ног, хотя вроде бы я ходил довольно тихо... На следующий день было совсем пусто. Я вышел и почувствовал себя очень одиноко. Пошел к остановке. Вокруг было много народу – и все одинаковые. Как будто все они приехали сюда из одного дома и вышли на этом перекрестке после работы, чтобы не возвращаться в свои квартиры.', 'views_count': 233, 'likes_count': 101, 'pk': 2}, {'poster_name': 'larry', 'poster_avatar': 'https://randus.org/avatars/m/81898dbdbdffdb18.png', 'pic': 'https://images.unsplash.com/photo-1581235854265-41981cb85c88?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80', 'content': 'Утром проснулся раньше всех – вижу у бассейна на вешалке висит оранжевое пальто. О, думаю – как это мое пальто за мной забралось так далеко – за целых 5000 километров. Присмотрелся – а это зонтик. И как только успел его сюда притащить! За завтраком сижу напротив своего попутчика, и все не решаюсь спросить его: «Может быть, мы все-таки не попутчики? Может, нам надо разъехаться в разные стороны? Вы не боитесь, что я сейчас сбегу?». Он не боится. Он вообще ничего не боится, кроме одного – когда у него в машине не работает сигнализация. А если она не работает, то он садится в машину и продолжает идти своим путем.', 'views_count': 366, 'likes_count': 198, 'pk': 4}, {'poster_name': 'leo', 'poster_avatar': 'https://randus.org/avatars/w/c1819dbdffffff18.png', 'pic': 'https://images.unsplash.com/photo-1570427968906-5a309bfd7de3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80', 'content': 'Пурр-пурр! типичная инстарамная фотка с котом , книжкой и едой. Но не буду скрывать, что это я: а то вдруг у вас кот тоже такой, тогда вы не увидите этого в своих фото. #кот #котики #инста #инстаграм #любовькживотным #любимыйкот ... Как же я люблю этот момент, когда ты понимаешь, что ты ничего толком не умеешь делать и даже не знаешь, что с этим делать.', 'views_count': 287, 'likes_count': 99, 'pk': 5}, {'poster_name': 'leo', 'poster_avatar': 'https://randus.org/avatars/w/c1819dbdffffff18.png', 'pic': 'https://images.unsplash.com/photo-1525351326368-efbb5cb6814d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&q=80', 'content': 'Ага, опять еда! Квадратная тарелка в квадратном кадре. А на тарелке, наверное, пирог! Мне было так жаль, что я не могу ее съесть. Я боялась, что они заметят, и если я не съем это, то, значит, они все подумают, что я плохая девочка... Но потом мне вспомнилось, как они на меня смотрели. Когда я была маленькой, на кухне всегда были родители, бабушка, дедушка, дядя Борис... Все вместе. И всегда одна я, потому что все остальные приходили туда лишь изредка. Мне казалось, если бы все ходили на работу, как и я, в этот свой офис, было бы совсем неинтересно.', 'views_count': 376, 'likes_count': 154, 'pk': 9}, {'poster_name': 'johnny', 'poster_avatar': 'https://randus.org/avatars/m/00183c7e3c382499.png', 'pic': 'https://images.unsplash.com/photo-1592660716763-09efba6db4e3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&q=80', 'content': 'Вышел погулять днем, пока все на работе. На улице странные штуки, похожие на колонны, которые кто-то сгрыз – незаметно и аккуратно, так, что даже мусора не осталось. И еще много странного: например, почему-то все птицы летают, как птицы, и, похоже, им это совершенно не мешает. Или вот еще: в траве – как будто следы от чьих-то ног, хотя вроде бы я ходил довольно тихо... На следующий день было совсем пусто. Я вышел и почувствовал себя очень одиноко. Пошел к остановке. Вокруг было много народу – и все одинаковые. Как будто все они приехали сюда из одного дома и вышли на этом перекрестке после работы, чтобы не возвращаться в свои квартиры.', 'views_count': 233, 'likes_count': 101, 'pk': 10}, {'poster_name': 'larry', 'poster_avatar': 'https://randus.org/avatars/m/81898dbdbdffdb18.png', 'pic': 'https://images.unsplash.com/photo-1581235854265-41981cb85c88?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80', 'content': 'Утром проснулся раньше всех – вижу у бассейна на вешалке висит оранжевое пальто. О, думаю – как это мое пальто за мной забралось так далеко – за целых 5000 километров. Присмотрелся – а это зонтик. И как только успел его сюда притащить! За завтраком сижу напротив своего попутчика, и все не решаюсь спросить его: «Может быть, мы все-таки не попутчики? Может, нам надо разъехаться в разные стороны? Вы не боитесь, что я сейчас сбегу?». Он не боится. Он вообще ничего не боится, кроме одного – когда у него в машине не работает сигнализация. А если она не работает, то он садится в машину и продолжает идти своим путем.', 'views_count': 366, 'likes_count': 198, 'pk': 12}, {'poster_name': 'leo', 'poster_avatar': 'https://randus.org/avatars/w/c1819dbdffffff18.png', 'pic': 'https://images.unsplash.com/photo-1570427968906-5a309bfd7de3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80', 'content': 'Пурр-пурр! типичная инстарамная фотка с котом , книжкой и едой. Но не буду скрывать, что это я: а то вдруг у вас кот тоже такой, тогда вы не увидите этого в своих фото. #кот #котики #инста #инстаграм #любовькживотным #любимыйкот ... Как же я люблю этот момент, когда ты понимаешь, что ты ничего толком не умеешь делать и даже не знаешь, что с этим делать.', 'views_count': 287, 'likes_count': 99, 'pk': 13}]
 ), ('fdahafhdahadfh', [])]
 
 @pytest.mark.parametrize("query, expected", test_search_for_posts_data)
 def test_search_for_posts(query, expected):
     assert search_for_posts(query) == expected
-
-
